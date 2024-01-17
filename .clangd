@@ -1,0 +1,4 @@
+CompileFlags:
+  CompilationDatabase: build/       # Search build/ directory for compile_commands.json
+  Add: [-I/opt/gcc-arm-none-eabi-win32/main/arm-none-eabi/include]
+  ExtraClangdArgs: ["--query-driver=/usr/bin/arm-none-eabi-gcc"]
