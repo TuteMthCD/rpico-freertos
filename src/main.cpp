@@ -8,20 +8,19 @@
 
 static QueueHandle_t Queue = NULL;
 
-bool pin = 0;
-
-void usb_task() {
+void usb_task(void*) {
     while(true) {
-        bool recive = NULL;
+        bool recive = false;
         if(xQueueReceive(Queue, &recive, 500)) {
             printf("%d\n", recive);
         } else {
-            printf("llook at queue\n");
+            printf("look at queue\n");
         }
     }
 }
 
-void led_task() {
+void led_task(void*) {
+    bool pin = 0;
     while(true) {
         pin = !pin;
         cyw43_arch_gpio_put(CYW43_WL_GPIO_LED_PIN, pin);
@@ -43,8 +42,8 @@ int main() {
 
     Queue = xQueueCreate(1, sizeof(bool));
 
-    xTaskCreate(led_task, "LED_Task", 256, NULL, 1, NULL);
-    xTaskCreate(usb_task, "usb_task", 256, NULL, 1, NULL);
+    xTaskCreate(&led_task, "LED_Task", 256, NULL, 1, NULL);
+    xTaskCreate(&usb_task, "usb_task", 256, NULL, 1, NULL);
 
     vTaskStartScheduler();
 }
