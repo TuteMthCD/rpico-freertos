@@ -1,5 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Name project
 SET(ProjectName rp2040Freertos)
 
@@ -14,7 +15,6 @@ include(${FREERTOS_KERNEL_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_i
 
 # Define project
 project(${ProjectName})
-
 # Initialize the Raspberry Pi Pico SDK
 pico_sdk_init()
 
